@@ -1,0 +1,12 @@
+'use strict';
+const assert=require('node:assert/strict');
+const {project}=require('./assets/app.js');
+const approx=(a,b)=>assert.ok(Math.abs(a-b)<1e-6,`${a} != ${b}`);
+const z={initial:10000,monthly:100,years:1,gross:0,baseFee:0,supportFee:0};
+approx(project(z).capital,11200);approx(project(z).paid,11200);approx(project(z).adviceCost,0);
+const fixed={...z,monthly:0};approx(project(fixed,true).capital,9900);approx(project(fixed,true).adviceCost,100);
+approx(project({...fixed,gross:.05,baseFee:.01,supportFee:.02}).capital,10000*1.05*.99*.98);
+approx(project({...fixed,gross:-.1}).capital,9000);
+approx(project({...z,initial:0,monthly:0},true).capital,0);
+const f=project({...z,years:20,gross:.04}),a=project({...z,years:20,gross:.04},true);assert.ok(f.capital>a.capital);assert.ok(a.adviceCost>0);
+console.log('Tests moteur : OK');

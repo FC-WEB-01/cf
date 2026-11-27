@@ -1,0 +1,29 @@
+# conseillerfinancier.fr — version statique de préproduction
+
+## Démarrer
+Ouvrir `index.html` ou exécuter `python3 -m http.server 8000` dans ce dossier puis ouvrir http://localhost:8000. Aucun npm, dépendance externe ou compilation. Déployer le contenu de ce dossier à la racine d’un hébergement statique HTTPS (accès privé recommandé avant validation). `index.html` est la page d’accueil ; `der.html` et `mentions-legales.html` sont des pages séparées. La préproduction contient `noindex, follow`, mais ce n’est pas une protection d’accès.
+
+## Vérifications impératives avant lancement public
+- Confirmer l’entité exploitante, l’ORIAS, les statuts CIF/COA, les associations, la RCP, le médiateur désigné, les liens d’intérêts, les rémunérations et les coordonnées. Compléter toutes les mentions des 3 pages et faire valider le DER. Assurer sa remise sur support durable. Le code est un modèle, non un avis de conformité.
+- Confirmer les quatre contrats exacts, leurs versions, les conventions de distribution, les frais négociés réels, la gamme ETF/SCPI, les minima et conditions. Les plafonds affichés sont issus des tableaux publics des assureurs, pas des tarifs du distributeur. Contrôler notamment la possibilité contractuelle de 0 % sur versement et du supplément annuel de 1 % ; préciser assiette, prélèvement, suivi, rétrocessions, résiliation et éventuels frais spécifiques. Pour Cardif les documents récupérés présentent une discordance de date entre texte extrait et rendu visuel (mars/octobre 2026) : les chiffres principaux concordent ; la date est affichée comme 2026 seulement, vérifier la version en vigueur. Les conditions de certains frais Cardif dépendent de la version.
+- Compléter `CONTACT` en tête de `assets/app.js` avec l’URL HTTPS de réservation, l’email et le téléphone réels, et harmoniser les coordonnées visibles dans le footer et le DER. Les boutons restent volontairement inactifs tant que ces coordonnées ne sont pas fournies. Intégrer le parcours sécurisé des assureurs, KYC, signature, validation du devoir de conseil et espace client hors de cette vitrine ; aucun parcours transactionnel n’est simulé.
+- Valider les mentions RGPD, journalisation, traitements, durées et sous-traitants ; aucun formulaire, cookie ni analytics dans la livraison. Installer une politique de consentement si des traceurs non exemptés sont ajoutés.
+- Remplacer les encarts `.placeholder` par les visuels fournis, en conservant les ratios CSS, dimensions intrinsèques width/height et textes alternatifs appropriés. Hero : WebP/AVIF 800×600 ; logos 600×200 ; produits 256×256 ; conseiller 640×800. Ajouter og:image et twitter:image réels, avec un visuel de partage 1200×630.
+- Police : Inter déclarée, fallback système immédiat. Pour garantir Inter partout, fournir une police WOFF2 auto-hébergée et une règle @font-face avec font-display: swap, ou garder le fallback pour éviter une requête. Pas de CDN ni de fichier de police inclus.
+- Après validation : retirer le bandeau préproduction et les formulations conditionnelles uniquement si confirmées ; remplacer `noindex, follow` par `index, follow`, vérifier les canonical et les URL finales, puis ajouter `Sitemap: https://conseillerfinancier.fr/sitemap.xml` dans robots.txt et soumettre le sitemap. Rediriger HTTP vers HTTPS, choisir www ou sans www, rediriger l’autre variante et index.html vers `/` au niveau de l’hôte. Vérifier les données structurées ; FAQPage ne garantit pas de résultat enrichi Google, ni de citation LLM.
+- Tester sur l’hébergement final Lighthouse mobile/desktop et PageSpeed Insights, WCAG clavier/lecteurs d’écran, Core Web Vitals réels. Activer compression Brotli/gzip, cache des assets versionnés, CSP adaptée, HSTS et autres headers de sécurité après configuration de l’hôte. Aucun score 95–100 ni CLS 0 garanti sans mesures finales.
+
+## Découpage SEO recommandé
+Conserver l’accueil comme page de synthèse. Extraire ensuite `/assurance-vie/` et `/per/` (fiches des contrats et conditions), `/comparateur/` (tables rendues en HTML), `/frais/` (coûts et modèle), `/simulateur/` (outil et méthode), `/guides/` (articles originaux et FAQ contextuelles), `/contact/`. Ajouter une fiche par contrat confirmé. Créer un title, une description, canonical, H1, contenu et FAQ uniques pour chaque page. Partager CSS et JS, adapter les liens relatifs aux nouvelles routes, mettre à jour sitemap, maillage et données structurées. Éviter les pages dupliquées et tout classement non documenté.
+
+## Sources officielles des tarifs
+- Suravenir, Patrimoine Vie Plus Multiprojet : https://www.suravenir.fr/wp-content/uploads/pdf/00300-U7-1.pdf
+- Suravenir, PERtinence Retraite : https://www.vieplus.fr/wp-content/uploads/2026/07/00300-B7.pdf
+- Cardif, tableaux de transparence : https://document-information-cle.cardif.fr/partenaires/frais-des-contrats
+- Vie Plus est la filière commerciale de Suravenir : https://www.vieplus.fr/qui-sommes-nous/
+- AMF : https://www.amf-france.org/fr/eli/fr/aai/amf/rg/article/325-5/20230101/notes
+- Code des assurances : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000036920566
+- CNIL : https://www.cnil.fr/fr/questions-reponses-sur-les-referentiels-relatifs-la-gestion-des-activites-commerciales-et-des
+
+## Test du moteur
+`node tests.js` exécute les tests du moteur sans navigateur. Les frais annuels sont appliqués par facteurs mensuels équivalents, le versement régulier arrive en fin de mois. Les scénarios partagent exactement les mêmes rendements et frais de base.

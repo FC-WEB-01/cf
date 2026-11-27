@@ -65,16 +65,3 @@ if(typeof document!=='undefined'){
     if(configured){$('contact-actions').hidden=false;$('contact-pending').hidden=true;}
   }
 }
-
-// Les encarts restent en place tant que leurs fichiers locaux ne sont pas disponibles.
-if(typeof document!=='undefined'){
-  document.querySelectorAll('[data-visual]').forEach(frame=>{
-    const img=new Image(Number(frame.dataset.width),Number(frame.dataset.height));
-    img.alt=frame.dataset.alt;
-    img.className='site-visual '+frame.dataset.visualClass;
-    img.decoding='async';
-    if(frame.dataset.visualClass==='hero-visual')img.fetchPriority='high';
-    img.addEventListener('load',()=>{if(img.naturalWidth&&img.naturalHeight)frame.replaceWith(img);},{once:true});
-    img.src=frame.dataset.visual;
-  });
-}

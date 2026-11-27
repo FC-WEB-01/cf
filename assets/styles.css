@@ -10,3 +10,5 @@
 @media(max-width:480px){.trust-grid{grid-template-columns:1fr}.trust-item .placeholder{max-width:340px}}
 
 .site-visual{display:block;width:100%;height:auto;object-fit:contain}.hero-visual{aspect-ratio:4/3;border-radius:14px}.product-visual{aspect-ratio:1/1;max-width:176px;margin-bottom:18px}
+
+.contact-portrait{width:100%;max-width:310px;justify-self:center;margin:0}.portrait-visual{aspect-ratio:4/5;object-fit:contain;border-radius:14px}.contact-portrait figcaption{margin-top:8px;text-align:center}

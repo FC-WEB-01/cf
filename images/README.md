@@ -6,4 +6,4 @@ Déposer les fichiers WebP suivants dans ce dossier :
 - `assurance-vie.webp` — assurance-vie, 256 × 256 px.
 - `per.webp` — plan d’épargne retraite, 256 × 256 px.
 
-Après ajout des fichiers binaires, remplacer les trois encarts correspondants dans `index.html` par les images locales en conservant les dimensions intrinsèques et les ratios CSS. Les emplacements restent visibles tant que les fichiers ne sont pas présents.
+La page d’accueil affiche automatiquement les fichiers locaux une fois disponibles. En attendant, les encarts descriptifs restent en place ; aucune image cassée n’est insérée dans le document. Après ajout des fichiers, il est recommandé de remplacer les encarts concernés par des balises img natives avec dimensions et chargement adaptés pour optimiser le LCP.
